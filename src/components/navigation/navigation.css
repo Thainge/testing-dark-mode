@@ -1,0 +1,36 @@
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+
+#light ul {
+    background-color: #f3ebf6;
+}
+
+#light ul {
+    background-color: #333;
+}
+
+li {
+float: left;
+}
+
+li a {
+display: block;
+font-size: 1.5em;
+color: white;
+text-align: center;
+padding: 28px 32px;
+text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+background-color: #111;
+}
+
+.floatRight {
+float: right;
+}
