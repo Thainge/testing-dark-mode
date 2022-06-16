@@ -1,14 +1,10 @@
 import "./DarkMode.css";
-import React, { ChangeEventHandler } from "react";
+import React,{useState,useEffect} from "react";
 import Toggle from "./Toggle";
 
 // 1
 const setDark = () => {
-
-  // 2
   localStorage.setItem("theme", "dark");
-
-  // 3
   document.documentElement.setAttribute("data-theme", "dark");
 };
 
@@ -32,8 +28,8 @@ if (defaultDark) {
 }
 
 // 5
-const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
-  if (e.target.checked) {
+const toggleTheme = (value) => {
+  if (value == "false") {
     setDark();
   } else {
     setLight();
@@ -41,20 +37,21 @@ const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
 };
 
 const DarkMode = () => {
-  const [toggled, setToggled] = React.useState(false);
-  const handleClick = () => {
-      setToggled((s) => !s);
-  };
+  const [toggled, setToggled] = useState();
+  useEffect(()=>{
+    localStorage.setItem("icon", 'true');
+    setToggled(localStorage.getItem("icon"))
+  },[])
+
+  const onClickEvent = () => {
+    localStorage.setItem("icon", toggled);
+    setToggled((s) => s == 'true'?'false':'true');
+    toggleTheme(toggled);
+  }
 
   return (
     <div>
-      <Toggle toggled={toggled} onClick={handleClick}/>
-        <input 
-        type="checkbox"
-          // 6
-          onChange={toggleTheme}
-          defaultChecked={defaultDark}
-        />
+      <Toggle toggled={toggled} onClick={onClickEvent} />
     </div>
   );
 };
